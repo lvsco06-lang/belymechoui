@@ -29,6 +29,7 @@ import {
 } from "@/lib/belyme";
 import { fetchStockMovements, STOCK_MOVEMENT_REASONS } from "@/lib/stock";
 import { buildReportCsv, downloadCsv, fetchDailyReport } from "@/lib/report";
+import { downloadReportPdf } from "@/lib/report-pdf";
 import {
   addExpense,
   deleteExpense,
@@ -251,11 +252,15 @@ function Dashboard() {
     onError: (e: Error) => toast.error(e.message),
   });
 
-  async function exportDailyReport() {
+  async function exportDailyReport(format: "csv" | "pdf") {
     setExporting(true);
     try {
       const report = await fetchDailyReport(reportDate);
-      downloadCsv(`belymechoui-rapport-${reportDate}.csv`, buildReportCsv(report));
+      if (format === "csv") {
+        downloadCsv(`belymechoui-rapport-${reportDate}.csv`, buildReportCsv(report));
+      } else {
+        downloadReportPdf(report, `belymechoui-rapport-${reportDate}.pdf`);
+      }
       toast.success(`Rapport du ${reportDate} exporté (${report.orders.length} commande(s))`);
     } catch (error) {
       console.error(error);
@@ -651,11 +656,18 @@ function Dashboard() {
                 />
               </div>
               <Button
-                onClick={() => void exportDailyReport()}
+                onClick={() => void exportDailyReport("pdf")}
                 disabled={exporting}
                 className="bg-ember-gradient text-ember-foreground shadow-ember"
               >
-                {exporting ? "Génération…" : "Exporter le rapport (CSV)"}
+                {exporting ? "Génération…" : "Exporter en PDF"}
+              </Button>
+              <Button
+                onClick={() => void exportDailyReport("csv")}
+                disabled={exporting}
+                variant="outline"
+              >
+                {exporting ? "Génération…" : "Exporter en CSV"}
               </Button>
             </div>
           </div>
