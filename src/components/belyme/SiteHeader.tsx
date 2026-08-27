@@ -7,13 +7,14 @@ import { useCart } from "@/lib/cart-context";
 import { RESTAURANT } from "@/lib/belyme";
 import { ThemeToggle } from "@/components/belyme/ThemeToggle";
 
-/** Une seule source pour les deux navigations : rien ne peut diverger. */
+/** Une seule source pour les deux navigations : rien ne peut diverger.
+ *  Le back-office (/admin) reste accessible en direct mais n'est pas
+ *  annoncé aux visiteurs. */
 const LIENS = [
   { type: "ancre", href: "#menu", label: "Menu du jour" },
   { type: "ancre", href: "#evenements", label: "Méchoui entier" },
   { type: "ancre", href: "#contact", label: "Nous trouver" },
   { type: "route", to: "/suivi", label: "Suivre ma commande" },
-  { type: "route", to: "/admin", label: "Admin" },
 ] as const;
 
 export function SiteHeader({ onOpenCart }: { onOpenCart: () => void }) {
