@@ -1,8 +1,22 @@
 // Rapport quotidien exportable en PDF — mise en page professionnelle pour envoi au propriétaire.
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
-import { formatFCFA, RESTAURANT } from "./belyme";
+import { RESTAURANT } from "./belyme";
 import type { DailyReport } from "./report";
+
+/**
+ * `formatFCFA` (locale fr-FR) sépare les milliers par une espace fine
+ * insécable (U+202F) : la police standard "helvetica" des PDF ne la
+ * connaît pas et affiche un caractère parasite à la place. On regroupe
+ * donc les milliers nous-mêmes avec une espace ASCII normale.
+ */
+function formatFCFA(amount: number): string {
+  const sign = amount < 0 ? "-" : "";
+  const grouped = Math.abs(Math.round(amount))
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return `${sign}${grouped} FCFA`;
+}
 
 type RGB = [number, number, number];
 
@@ -67,9 +81,17 @@ function statBox(
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(...COLOR.muted);
-  doc.text(label.toUpperCase(), x + 4, y + 7);
+  doc.text(label.toUpperCase(), x + 4, y + 7, { maxWidth: w - 8 });
+
+  // Réduit la taille tant que la valeur déborde de la carte, pour ne jamais chevaucher le cadre.
+  const maxTextWidth = w - 8;
+  let fontSize = 13;
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(13);
+  doc.setFontSize(fontSize);
+  while (fontSize > 8 && doc.getTextWidth(value) > maxTextWidth) {
+    fontSize -= 1;
+    doc.setFontSize(fontSize);
+  }
   doc.setTextColor(...valueColor);
   doc.text(value, x + 4, y + 16);
 }

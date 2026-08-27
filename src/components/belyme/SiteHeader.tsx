@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useCart } from "@/lib/cart-context";
 import { RESTAURANT } from "@/lib/belyme";
+import { ThemeToggle } from "@/components/belyme/ThemeToggle";
 
 /** Une seule source pour les deux navigations : rien ne peut diverger. */
 const LIENS = [
@@ -45,6 +46,8 @@ export function SiteHeader({ onOpenCart }: { onOpenCart: () => void }) {
         </nav>
 
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+          <ThemeToggle />
+
           <Button asChild variant="ghost" size="icon" aria-label="Appeler le restaurant">
             <a href={`tel:${RESTAURANT.phone}`}>
               <Phone className="h-5 w-5" />

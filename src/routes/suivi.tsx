@@ -5,6 +5,7 @@ import { ArrowLeft, ChefHat, CircleCheck, PackageX, Search, Truck } from "lucide
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { formatFCFA } from "@/lib/belyme";
+import { ThemeToggle } from "@/components/belyme/ThemeToggle";
 import {
   TRACK_STEPS,
   formatCode,
@@ -71,12 +72,15 @@ function SuiviPage() {
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-10 sm:py-16">
-      <Link
-        to="/"
-        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
-      >
-        <ArrowLeft className="h-4 w-4" /> Retour au menu
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
+        >
+          <ArrowLeft className="h-4 w-4" /> Retour au menu
+        </Link>
+        <ThemeToggle />
+      </div>
 
       <header className="mt-6 mb-8">
         <p className="text-xs tracking-[0.3em] text-primary uppercase">Suivi</p>

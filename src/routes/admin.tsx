@@ -19,6 +19,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { fetchMenuForDay } from "@/lib/menu-api";
 import { DishManager } from "@/components/belyme/DishManager";
+import { ThemeToggle } from "@/components/belyme/ThemeToggle";
 import {
   DAYS,
   ORDER_STATUSES,
@@ -344,7 +345,8 @@ function Dashboard() {
           <h1 className="font-display text-3xl text-sand">Back-office Belymechoui</h1>
           <p className="text-sm text-muted-foreground">Stocks, menus et commandes en temps réel.</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Button asChild variant="outline">
             <Link to="/">Voir le site</Link>
           </Button>
