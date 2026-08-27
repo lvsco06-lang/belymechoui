@@ -34,7 +34,9 @@ export const RESTAURANT = {
   whatsapp: "22370000000", // Numéro WhatsApp au format international sans "+"
   address: "Sébénicoro, Bamako, Mali",
   hours: "Tous les jours — 11h00 à 23h30",
-  mapsQuery: "Sébénicoro, Bamako, Mali",
+  // Embed Google Maps de la fiche établissement réelle (place_id), pour un itinéraire exact.
+  mapsEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.952089964744!2d-8.061970925876908!3d12.585409287695631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe51cd17d3d5e705%3A0xd5def496e7029c3!2sBely%20Mechoui!5e0!3m2!1sfr!2sml!4v1787857840825!5m2!1sfr!2sml",
 } as const;
 
 export const DAYS = [

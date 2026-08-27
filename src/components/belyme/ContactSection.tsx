@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { RESTAURANT, whatsappUrl } from "@/lib/belyme";
 
 export function ContactSection() {
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(RESTAURANT.mapsQuery)}&output=embed`;
-
   return (
     <section id="contact" className="mx-auto max-w-6xl px-4 py-16">
       <p className="text-xs tracking-[0.3em] text-primary uppercase">Nous trouver</p>
@@ -47,7 +45,7 @@ export function ContactSection() {
         <div className="overflow-hidden rounded-xl border border-border">
           <iframe
             title="Localisation du restaurant Belymechoui à Sébénicoro, Bamako"
-            src={mapSrc}
+            src={RESTAURANT.mapsEmbedUrl}
             loading="lazy"
             className="h-72 w-full lg:h-full"
             referrerPolicy="no-referrer-when-downgrade"
