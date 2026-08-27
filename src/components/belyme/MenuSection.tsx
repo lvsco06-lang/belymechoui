@@ -4,7 +4,7 @@ import { Crown, Plus } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { DishImage } from "@/components/belyme/Dishimage";
+import { DishImage } from "@/components/belyme/DishImage";
 import { supabase } from "@/integrations/supabase/client";
 import { fetchMenuForDay } from "@/lib/menu-api";
 import { useCart } from "@/lib/cart-context";
